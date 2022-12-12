@@ -2,6 +2,7 @@ package com.example.lab4androiod;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,21 +31,41 @@ public class FavCountries extends AppCompatActivity implements DatabaseManager.D
         ctadapter.listener = this;
         favCountryList.setLayoutManager(new LinearLayoutManager(this));
 
+        //handle swipe left or right in recycler view:
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callBackMethod); // creating new itemtouchhelper class
+        itemTouchHelper.attachToRecyclerView(favCountryList); // use itemtouchhelper to recycle view
+
     }
 
+    ItemTouchHelper.SimpleCallback callBackMethod = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView,
+                              @NonNull RecyclerView.ViewHolder viewHolder,
+                              @NonNull RecyclerView.ViewHolder target) {
+            //Toast.makeText(FavCountries.this, "Item Moveing", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            int position = viewHolder.getAdapterPosition();
+            ((CurrencyApp) getApplication()).databaseManager.deleteFromFavourites(ctadapter.list.get(position));
+            ctadapter.list.remove(position); // remove from DB
+            ctadapter.notifyDataSetChanged();
+
+            }
+
+    };
     @Override
     protected void onResume() {
         super.onResume();
         ((CurrencyApp) getApplication()).databaseManager.getDB(this);
         ((CurrencyApp) getApplication()).databaseManager.getAllCountries();
         ((CurrencyApp) getApplication()).databaseManager.listener = this;
-
     }
     @Override
     public void insertCountryDone() {
-
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = new MenuInflater(this);

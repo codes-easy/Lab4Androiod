@@ -6,7 +6,10 @@ import android.os.Looper;
 
 import androidx.room.Room;
 
+import java.util.ArrayList;
+
 public class DatabaseManager {
+
 
 
     interface DataBaseListener{
@@ -43,6 +46,15 @@ public class DatabaseManager {
             }
         });
     }
+    public void deleteFromFavourites(Country cy) {
+        CurrencyApp.executorService.execute(new Runnable(){
+            @Override
+            public void run() {
+                countryDB.getDao().deleteCountry(cy);
+            }
+        });
+    }
+
 
     void getAllCountries(){
         CurrencyApp.executorService.execute(new Runnable() {

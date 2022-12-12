@@ -5,6 +5,7 @@
     android:layout_height="60dp"
     android:orientation="horizontal"
     android:weightSum="4"
+    android:background="@color/LightGreen"
     >
     <TextView
         android:id="@+id/country"

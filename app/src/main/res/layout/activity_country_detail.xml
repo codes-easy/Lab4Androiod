@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CountryDetail">
+    tools:context=".CountryDetail"
+    android:background="@color/LightCyan">
 
     <ImageView
         android:id="@+id/flagimage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="290dp"
+        android:layout_height="252dp"
         app:layout_constraintBottom_toTopOf="@id/language"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,64 +20,45 @@
         android:id="@+id/language"
         android:textSize="20sp"
         android:gravity="center"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/guideline2"
+        app:layout_constraintBottom_toTopOf="@id/currencyname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/flagimage" />
-
-    <TextView
-        android:id="@+id/capitalcity"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/language" />
-    <TextView
-        android:id="@+id/population"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-         />
+        app:layout_constraintTop_toBottomOf="@id/guideline2" />
 
 
     <TextView
         android:id="@+id/currencyname"
         android:layout_width="0dp"
-        android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@id/exchangerate"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/population" />
-
+        app:layout_constraintTop_toBottomOf="@id/exchangerate" />
 
     <TextView
-        android:gravity="center"
         android:id="@+id/exchangerate"
-        android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/currencyname" />
-
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35" />
+        app:layout_constraintGuide_percent="0.4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

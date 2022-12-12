@@ -1,8 +1,11 @@
 package com.example.lab4androiod;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.ItemTouchHelper.SimpleCallback;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,7 +38,9 @@ ArrayList<Country> listCountries = new ArrayList<>();
         ((CurrencyApp)getApplication()).databaseManager.getDB(this);
         countryList.setAdapter(countriesAdapter);
         countryList.setLayoutManager(new LinearLayoutManager(this));
-    }
+
+
+            };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
