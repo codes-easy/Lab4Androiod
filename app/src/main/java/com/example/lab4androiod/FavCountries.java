@@ -46,15 +46,28 @@ public class FavCountries extends AppCompatActivity implements DatabaseManager.D
             return false;
         }
 
+       //on swipe left countries will be removed from db and alert message pop up for user to select
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
             int position = viewHolder.getAdapterPosition();
-            ((CurrencyApp) getApplication()).databaseManager.deleteFromFavourites(ctadapter.list.get(position));
-            ctadapter.list.remove(position); // remove from DB
-            ctadapter.notifyDataSetChanged();
+            String cname=ctadapter.list.get(position).getCountry();
+            AlertDialog.Builder builder = new AlertDialog.Builder(FavCountries.this);
+            builder.setMessage("Are you sure you want to remove "+ cname+" from the Favourites??");
 
-            }
-
+            builder.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    ((CurrencyApp) getApplication()).databaseManager.deleteFromFavourites(ctadapter.list.get(position));
+                    ctadapter.list.remove(position); // remove from DB
+                    ctadapter.notifyDataSetChanged();
+                }
+            });
+            builder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    ctadapter.notifyDataSetChanged();
+                }
+            });
+            builder.create().show();
+        }
     };
     @Override
     protected void onResume() {
